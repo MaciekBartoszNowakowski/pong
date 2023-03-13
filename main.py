@@ -7,7 +7,7 @@ class Game(object):
 
     def __init__(self):
         #Config
-        self.tps_max=120
+        self.tps_max=180
 
         #initialization
         pygame.init()
@@ -38,8 +38,12 @@ class Game(object):
             self.draw()
             pygame.display.flip()
 
-    def tick(self):
 
+            #RESET
+            if self.ball.poz.x < 0 or self.ball.poz.x > 1280:
+                self.ball = Pilka(self, 625, 355)
+
+    def tick(self):
         self.box1.tick(pygame.K_w,pygame.K_s)
         self.box2.tick(pygame.K_UP,pygame.K_DOWN)
         self.ball.tick()

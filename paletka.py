@@ -20,7 +20,18 @@ class Paletka(object):
         self.poz += self.vel
         self.vel*=0
 
+        # deflection
+        if self.game.ball.poz.y > self.poz.y and self.game.ball.poz.y + 10 < 90 + self.poz.y :
+            #self.game.ball.vel *= -1
+            if self.poz.x < self.game.ball.poz.x+10 and self.poz.x + 11 > self.game.ball.poz.x:
+                if self.game.ball.vel.x < 5 and self.game.ball.vel.x > -5:
+                    self.game.ball.vel.x *= -1.1
+                else:
+                    self.game.ball.vel.x *= -1
+
+
+
 
     def draw(self,r,g,b):
-        rect=pygame.Rect(self.poz.x,self.poz.y, 10, 90)
+        rect=pygame.Rect(self.poz.x,self.poz.y, 11, 90)
         pygame.draw.rect(self.game.screen, (r, g ,b), rect)
