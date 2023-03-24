@@ -33,12 +33,13 @@ class Menuski(object):
             Game()
 
     def draw(self):
+        #Napis dotyczący trybu multiplayer
         font = pygame.font.Font('freesansbold.ttf', 32)
-        tresc = ('Nacisnij jeden dla trybu multiplayer')
-        text = font.render(tresc, True, self.white, self.black)
-        textRect = text.get_rect()
-        textRect.center = (self.x // 2, self.y // 2)
-        self.screen.blit(text, textRect)
+        trybmulti = ('Nacisnij jeden dla trybu multiplayer')
+        trybmulti = font.render(trybmulti, True, self.white, self.black)
+        multiRect = trybmulti.get_rect()
+        multiRect.center = (self.x // 2, self.y // 4)
+        self.screen.blit(trybmulti, multiRect)
 
 
 pygame.init()

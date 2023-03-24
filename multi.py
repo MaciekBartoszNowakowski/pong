@@ -2,6 +2,7 @@ import pygame, sys
 from paletka import Paletka
 from pilka import Pilka
 from winner_screen import winner
+from tablica_wynikowa import score_table
 
 
 class Game(object):
@@ -18,6 +19,7 @@ class Game(object):
         self.ball = Pilka(self, 625, 355)
         self.result = [0, 0]
         self.koniec = None
+        self.score = score_table(self)
 
         # time
         self.tps_clock = pygame.time.Clock()
@@ -46,13 +48,13 @@ class Game(object):
             if self.ball.poz.x < 0:
                 self.ball = Pilka(self, 625, 355)
                 self.result[0] += 1
-                if self.result[0] == 1:
+                if self.result[0] == 3:
                     self.koniec = winner(self, 2)
 
             if self.ball.poz.x > 1280:
                 self.ball = Pilka(self, 625, 355)
                 self.result[1] += 1
-                if self.result[1] == 1:
+                if self.result[1] == 3:
                     self.koniec = winner(self, 1)
 
     def tick(self):
@@ -67,6 +69,7 @@ class Game(object):
             self.box1.draw(0, 150, 255)
             self.box2.draw(255, 0, 0)
             self.ball.draw()
+            self.score.draw(self.result)
         else:
             self.koniec.draw()
 

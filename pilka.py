@@ -16,11 +16,11 @@ class Pilka(object):
         # deflection and acceleration
         if self.poz.y > 710:
             self.vel.y *= -1
-            if self.vel.x > -5 and self.vel.x < 5:
+            if self.vel.x > -2.8 and self.vel.x < 2.8:
                 self.vel *= 1.1
         if self.poz.y < 0:
             self.vel.y *= -1
-            if self.vel.x > -5 and self.vel.x < 5:
+            if self.vel.x > -2.8 and self.vel.x < 2.8:
                 self.vel *= 1.1
 
     def draw(self):
