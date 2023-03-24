@@ -10,8 +10,8 @@ class Pilka(object):
         self.vel = Vector2(1, 1)
 
     def tick(self):
-        #physic
-        #speed
+        # physic
+        # speed
         self.poz += self.vel
         # deflection and acceleration
         if self.poz.y > 710:
@@ -23,9 +23,8 @@ class Pilka(object):
             if self.vel.x > -5 and self.vel.x < 5:
                 self.vel *= 1.1
 
-
     def draw(self):
         r, g, b = 20, 255, 20
-        len=10
+        len = 10
         rect = pygame.Rect(self.poz.x, self.poz.y, len, len)
         pygame.draw.rect(self.game.screen, (r, g, b), rect)
