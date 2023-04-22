@@ -1,7 +1,10 @@
 import pygame, sys
 
 from multi import Game
+from pojedyncze_napisy import tekst
+from przygoda import adventure
 
+from wybor import level
 
 class Menuski(object):
 
@@ -10,8 +13,10 @@ class Menuski(object):
         self.x = 1280
         self.y = 720
         self.screen = pygame.display.set_mode((self.x, self.y))
-        self.black = (0, 0, 0)
-        self.white = (255, 255, 255)
+        self.menopis = tekst(self, self.x // 2, 25, 40, 'MENU')
+        self.multi = tekst(self, self.x // 2, 76, 32, 'Nacisnij 1, aby rozpoczac tryb multiplayer')
+        self.single = tekst(self, self.x // 2, 126, 32, 'Nacisnij 2, aby rozpoczac tryb singleplayer')
+        self.przygoda = tekst(self, self.x // 2, 176, 32, 'Nacisnij 3 aby rozpoczac tryb przygody :-)')
 
         while True:
             # Handle events
@@ -31,15 +36,17 @@ class Menuski(object):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_1]:
             Game()
+        if pressed[pygame.K_2]:
+            pygame.time.wait(100)
+            level()
+        if pressed[pygame.K_3]:
+            adventure()
 
     def draw(self):
-        #Napis dotyczący trybu multiplayer
-        font = pygame.font.Font('freesansbold.ttf', 32)
-        trybmulti = ('Nacisnij jeden dla trybu multiplayer')
-        trybmulti = font.render(trybmulti, True, self.white, self.black)
-        multiRect = trybmulti.get_rect()
-        multiRect.center = (self.x // 2, self.y // 4)
-        self.screen.blit(trybmulti, multiRect)
+        self.menopis.draw((0, 0, 0), (255, 255, 255))
+        self.multi.draw((0, 0, 0), (255, 255, 255))
+        self.single.draw((0, 0, 0), (255, 255, 255))
+        self.przygoda.draw((0, 0, 0), (255, 255, 255))
 
 
 pygame.init()

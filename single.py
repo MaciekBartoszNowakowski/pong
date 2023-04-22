@@ -3,11 +3,12 @@ from paletka import Paletka
 from pilka import Pilka
 from winner_screen import winner
 from tablica_wynikowa import score_table
+from AI import  high, easy,mid
 
 
-class Game(object):
+class samotny(object):
 
-    def __init__(self):
+    def __init__(self, poziom):
         # Config
         self.tps_max = 180
 
@@ -20,6 +21,13 @@ class Game(object):
         self.result = [0, 0]
         self.koniec = None
         self.score = score_table(self)
+
+        if poziom == 1:
+            self.poziom=easy(self)
+        if poziom == 2:
+            self.poziom=mid(self)
+        if poziom == 3:
+            self.poziom=high(self)
 
         # time
         self.tps_clock = pygame.time.Clock()
@@ -49,7 +57,7 @@ class Game(object):
                 self.ball = Pilka(self, 625, 355)
                 self.result[0] += 1
                 if self.result[0] == 3:
-                    self.koniec = winner(self, 'Wygrał gracz numer 2')
+                    self.koniec = winner(self, 'Wygrał gracz KOMPUTER')
 
             if self.ball.poz.x > 1280:
                 self.ball = Pilka(self, 625, 355)
@@ -59,10 +67,14 @@ class Game(object):
 
     def tick(self):
         self.box1.tick(pygame.K_w, pygame.K_s)
-        self.box2.tick(pygame.K_UP, pygame.K_DOWN)
-        self.ball.tick()
+
+        # Sterowanie AI
+        self.poziom.sterowanie()
+
+
         if self.koniec != None:
             self.koniec.tick()
+        print(self.ball.vel)
 
     def draw(self):
         if self.koniec == None:

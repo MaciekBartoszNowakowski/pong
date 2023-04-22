@@ -10,13 +10,20 @@ class Paletka(object):
         self.poz = Vector2(x, y)
         self.vel = Vector2(0.0)
 
-    def tick(self, gora, dol):
+    def tick(self, gora, dol, ruch=0):
         # input
-        pressed = pygame.key.get_pressed()
-        if pressed[gora] and self.poz.y > 0:
-            self.vel = Vector2(0, -3)
-        if pressed[dol] and self.poz.y < 620:
-            self.vel = Vector2(0, 3)
+        if ruch!=2:
+            pressed = pygame.key.get_pressed()
+            if pressed[gora] and self.poz.y > 0:
+                self.vel = Vector2(0, -3)
+            if pressed[dol] and self.poz.y < 620:
+                self.vel = Vector2(0, 3)
+
+            # ai input
+            if ruch == 1 and self.poz.y > 0:
+                self.vel = Vector2(0, -4)
+            if ruch == -1 and self.poz.y < 620:
+                self.vel = Vector2(0, 4)
 
         # physic
         self.poz += self.vel
@@ -40,6 +47,8 @@ class Paletka(object):
                         self.game.ball.poz.x = self.poz.x - 10
                     else:
                         self.game.ball.poz.x = self.poz.x + 11
+
+                return 1
 
     def draw(self, r, g, b):
         rect = pygame.Rect(self.poz.x, self.poz.y, 11, 100)
