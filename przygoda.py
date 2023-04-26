@@ -7,13 +7,13 @@ from AI import high, easy, mid
 
 class adventure(object):
 
-    def __init__(self):
+    def __init__(self, menu):
         # Config
         self.tps_max = 180
 
         # initialization
         self.screen = pygame.display.set_mode((1280, 720))
-        self.rezult = 0
+        self.result = [0,0]
 
         self.box2 = Paletka(self, 10, 10)
         self.ball = Pilka(self, 30, 60)
@@ -34,6 +34,11 @@ class adventure(object):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit(0)
+            if self.result == [-1, -1]:
+                break
+            if self.result == [-2,-2]:
+                menu.repeat=True
+                break
 
             # drawing
             self.screen.fill((0, 0, 0))
@@ -51,8 +56,8 @@ class adventure(object):
 
             if self.ball.poz.x < 0:
                 end = self.koniec = winner(self, "No niestety nie wyszlo")
-            if self.rezult == [-1, -1]:
-                break
+            # if self.rezult == [-1, -1]:
+            #     break
 
     def tick(self):
         self.box2.tick(pygame.K_w, pygame.K_s)

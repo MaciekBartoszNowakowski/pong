@@ -8,7 +8,7 @@ from AI import  high, easy,mid
 
 class samotny(object):
 
-    def __init__(self, poziom):
+    def __init__(self, poziom,level,menu):
         # Config
         self.tps_max = 180
 
@@ -39,7 +39,13 @@ class samotny(object):
                 if event.type == pygame.QUIT:
                     sys.exit(0)
             if self.result == [-1, -1]:
+                level.go_back=True
                 break
+            if self.result == [-2,-2]:
+                menu.repeat=True
+                level.go_back = True
+                break
+
 
             # TICKING
             self.tps_delta += self.tps_clock.tick() / 1000.0
@@ -74,7 +80,6 @@ class samotny(object):
 
         if self.koniec != None:
             self.koniec.tick()
-        print(self.ball.vel)
 
     def draw(self):
         if self.koniec == None:

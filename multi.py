@@ -7,7 +7,7 @@ from tablica_wynikowa import score_table
 
 class Game(object):
 
-    def __init__(self):
+    def __init__(self,menu):
         # Config
         self.tps_max = 180
 
@@ -31,6 +31,9 @@ class Game(object):
                 if event.type == pygame.QUIT:
                     sys.exit(0)
             if self.result == [-1, -1]:
+                break
+            if self.result == [-2,-2]:
+                menu.repeat=True
                 break
 
             # TICKING

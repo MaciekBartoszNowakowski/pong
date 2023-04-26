@@ -30,7 +30,7 @@ class high(object):
 
 class level(object):
 
-    def __init__(self):
+    def __init__(self,menu):
         self.x = 1280
         self.y = 720
         self.screen = pygame.display.set_mode((self.x, self.y))
@@ -38,12 +38,18 @@ class level(object):
         self.es = tekst(self, self.x // 2, 76, 32, 'Glupkowaty -- 1')
         self.hard = tekst(self, self.x // 2, 126, 32, 'Godny -- 2')
         self.imposibru = tekst(self, self.x // 2, 176, 32, 'Niezwycezony -- 3')
+        self.go_back=False
+        self.menu=menu
 
         while True:
             # Handle events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit(0)
+            if self.go_back:
+                menu.repeat=self.menu
+                break
+
 
             # Drawing
             self.screen.fill((0, 0, 0))
@@ -56,11 +62,13 @@ class level(object):
     def tick(self):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_1]:
-            samotny(1)
+            samotny(1,self,self.menu)
         if pressed[pygame.K_2]:
-            samotny(2)
+            samotny(2,self,self.menu)
         if pressed[pygame.K_3]:
-            samotny(3)
+            samotny(3,self,self.menu)
+
+
 
 
     def draw(self):

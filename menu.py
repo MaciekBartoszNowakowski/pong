@@ -17,6 +17,7 @@ class Menuski(object):
         self.multi = tekst(self, self.x // 2, 76, 32, 'Nacisnij 1, aby rozpoczac tryb multiplayer')
         self.single = tekst(self, self.x // 2, 126, 32, 'Nacisnij 2, aby rozpoczac tryb singleplayer')
         self.przygoda = tekst(self, self.x // 2, 176, 32, 'Nacisnij 3 aby rozpoczac tryb przygody :-)')
+        self.repeat=False
 
         while True:
             # Handle events
@@ -35,12 +36,24 @@ class Menuski(object):
     def tick(self):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_1]:
-            Game()
+            while True:
+                Game(self)
+                if not self.repeat:
+                    break
+                self.repeat=False
         if pressed[pygame.K_2]:
             pygame.time.wait(100)
-            level()
+            while True:
+                level(self)
+                if not self.repeat:
+                    break
+                self.repeat = False
         if pressed[pygame.K_3]:
-            adventure()
+            while True:
+                adventure(self)
+                if not self.repeat:
+                    break
+                self.repeat = False
 
     def draw(self):
         self.menopis.draw((0, 0, 0), (255, 255, 255))
